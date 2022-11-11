@@ -28,6 +28,23 @@ write_files:
     exit 0
   path: /root/updatedns.sh
   permissions: "0755"
+- content: |
+        \.
+         \'.      ;.
+          \ '. ,--''-.~-~-'-,
+           \,-' ,-.   '.~-~-~~,
+         ,-'   (###)    \-~'~=-.
+     _,-'       '-'      \=~-"~~',
+    /o                    \~-""~=-,
+    \__                    \=-,~"-~,
+       """===-----.         \~=-"~-.
+                   \         \*=~-"
+              rs    \         "=====----
+                     \
+                      \
+    geklaut von: https://www.asciiart.eu/mythology/unicorns
+  path: /etc/motd
+  permissions: "0644"                      
 runcmd:
 - dnf update -y
 # twice, sometimes it doesn't work
