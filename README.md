@@ -85,5 +85,9 @@ cd lila-einhorn
 terraform destroy
 ```
 
+##Attention
+* The sandbox-plan for viewdns.info has only 250 non recurring requests. So check if it's not working.
+* the free plan for virustotal hat 4 reqs/min, so use it slowly.
+
 ## ToDo
 * write some scripts to do investigations and collect informations automatically
