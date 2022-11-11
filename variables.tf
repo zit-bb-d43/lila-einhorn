@@ -20,10 +20,10 @@ variable "domain" {
   default=""
 }
 
-#variable "usersshkeys" {
-#  type = list(string)
-#  default = []
-#}
+variable "usersshkeys" {
+  type = list(string)
+  default = []
+}
 
 # dyndns
 variable "dyndnsuser" {
