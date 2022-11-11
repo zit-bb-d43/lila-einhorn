@@ -1,0 +1,56 @@
+        \.
+         \'.      ;.
+          \ '. ,--''-.~-~-'-,
+           \,-' ,-.   '.~-~-~~,
+         ,-'   (###)    \-~'~=-.
+     _,-'       '-'      \=~-"~~',
+    /o                    \~-""~=-,
+    \__                    \=-,~"-~,
+       """===-----.         \~=-"~-.
+                   \         \*=~-"
+              rs    \         "=====----
+                     \
+                      \
+    Einhorn geklaut von: https://www.asciiart.eu/mythology/unicorns
+
+
+###########################################################################################
+#                             USAGE                                                       #
+###########################################################################################
+
+# set vars for IP and DOMAIN if already known
+export IP=<IP>
+export DOM=<DOMAIN>
+
+# if not, dns [rev] lookup
+dig a $DOM +short
+dig -x $IP +short
+
+# whois
+whois $DOM
+whois $IP
+
+
+# reverseip lookup at viewdns.info
+curl "https://api.viewdns.info/reverseip/?host=${IP}&apikey=${VIEWDNS_APIKEY}&output=json" --output api.viewdns.info_${IP}_01.json
+jq ".response.domains[].name" api.viewdns.info_${IP}_01.json
+# if this is buggy, check balance
+curl https://api.viewdns.info/account/?action=balance&apikey=${VIEWDNS_APIKEY}&output=json | jq "."
+
+# virus total
+vt ip $IP
+vt domain $DOMAIN
+
+
+# ask otx.alienvault.com
+# ipv4 infos
+for SECTION in general reputation geo malware url_list passive_dns http_scans ; do curl -s https://otx.alienvault.com/api/v1/indicators/IPv4/${IP}/${SECTION} -H "${ALIENVAULT_APIKEY}" > alienvault_ip_${IP}_${SECTION}.json ; done
+jq "." alienvault_ip_${IP}*
+
+# Domain infos, should be almost the same
+for SECTION in general reputation geo malware url_list passive_dns whois http_scans ; do curl -s https://otx.alienvault.com/api/v1/indicators/IPv4/${IP}/${SECTION} -H "${ALIENVAULT_APIKEY}" > alienvault_domain_${DOM}_${SECTION}.json ; done
+jq "." alienvault_domain_${DOM}*
+
+
+
+
