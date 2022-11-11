@@ -57,7 +57,8 @@ whois $IP
 # reverseip lookup at viewdns.info
 curl "https://api.viewdns.info/reverseip/?host=${IP}&apikey=${VIEWDNS_APIKEY}&output=json" --output api.viewdns.info_${IP}_01.json
 jq ".response.domains[].name" api.viewdns.info_${IP}_01.json
-
+# if this is buggy, check balance
+curl https://api.viewdns.info/account/?action=balance&apikey=${VIEWDNS_APIKEY}&output=json | jq "."
 
 # virus total
 vt ip $IP
