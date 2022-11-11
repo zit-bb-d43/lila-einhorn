@@ -61,6 +61,7 @@ runcmd:
 - echo "export VTCLI_APIKEY=${APIKEY_VIRUSTOTAL}" >> /root/.bashrc
 - echo "export VIEWDNS_APIKEY=${APIKEY_VIEWDNS}" >> /root/.bashrc
 - echo "export ALIENVAULT_APIKEY=${APIKEY_ALIENVAULT}" >> /root/.bashrc
+- aria2c https://raw.githubusercontent.com/zit-bb-d43/lila-einhorn/2d19704fa57017121cdc32ca1fd70995a43f8925/motd -d /etc -o motd --allow-overwrite="true"
 - /root/updatedns.sh
 - touch /root/READY
 # alienvault, viewdns.info, binaryedge.io, builtwith.com, threatcrowd.org threatminer.org
