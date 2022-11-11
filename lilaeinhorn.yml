@@ -1,0 +1,48 @@
+#cloud-config
+users:
+- name: pferd
+  groups: users, admin
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDU5HkuIRg1MUnbhUIHieRdPOhOU7FPkByAb4R98entkH1vzmsd+ox9fNXkWsZrTuwK9QnaGeftKZODoCkESqK/DZMv588YcuqgZObW6/T8hs9sgAsD9SSbJetunUYo9fi+tebhAbKINj0FHW1KjOXpckHEEen0MWbPgXqHIQ3968qnT4lIzvVHuVctQFbw7RfLGoY0Sdntssw1WX7/EdatK0nYFBZ3XZWIlDBA2KyTVDGlm2/8lXQs9hELKC2FHDB7X0q4Ay43Z9Szz9KDR3uNAYPM02kVFunCouRCpk1VaDAntIpmao2yMOZwzstGwMDV46nFG7HChXsi3T5283ej falko@falko-pc
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4yiLe3F4kzufqi17tkmHwsO+0iLw8qxRqUDZqy6fycZd0JRJiwetbXn7+9K/n/whoCPJEYLRY9n1lt+rCbxupRvqL4ck9ezckp1Gd1mJYaR4z96QmB/illXF/zUPPKRpoixTu8MF48nt3Nlk+0im7blcEo2ZTCDq/IEQPtLjNP9i3ean0bYcJ07CRR92N270YLHpRHa0jA7s6qTSE8o6GUS29jVpNJJEDL4FXrFyhwbMy47op3Gf9QJ9SB/Xow9IPCDZpb3UaXgrrFyTnN6lGmFWyll6PWlY0GspF/bh6jaP1qGKfDKr1SkvtSunjsU0OKn72Tlx1vEE1/dYlsw5Ln1bKTd7hUTMTQ205YeWRhsdttTRuocigy5Q6vuSK6rbtcDL5eIwwADCD4tKbwiQmbzWWIQwbkeczl3EW9BbXcwTc6y8DwOqfUXkpkU/z7CJmeWDIau+9chI4JtbYmLy6UZ64uNpVdFnHVBvU4dQwtKStUhnPOd/ofCrnREQsGNE= falko@webssh
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDusO5MsE91HnsvrBUBmLWgw16WXuTVS4Wwu4d6L3sreU3mZKCB3blMni7ddW/onkYVUKvatj/OZnsXB/KAt+6X3M2DVzXzi6a3DfHbiVveElwKNVjSuXKbnOUPp59E+6TKJLtT0hi7H+O04SQeMQv0GmU0oSwE0MnlPkervTbUxv6y+ZThLA6TSCutK9RjHG8Pqqtuc3ueJKN/hjQwbvBwVBcz2xt1nr50YMe1Yim22siBRCAiIE35RYi4ZmPoH5pXnWPG79uQTM/TMgmIh2IU+rQfFmPLnZz+yx/iT33A8WLufisMxUmuJw9E5qHF6IrBJyX4RwoWQHOwUgeuXjBd19zOwrx2L72hSHTRoU485+Tb7+1y6jVLLCAYrEvVAWD9S1UiUzD0wepDF+PrtCHkPaOd68g14cNsoAcFLDhjkbboBCQeBUhlDS4fNVc0jfoaeOCXFgwLvduievaqLUozDheb+kTtM+pggeZf3wzbYVZdY78pDdXIHFWe3AfcgzU= falko@webssh
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCS9A5MpDRso7hFUn8AXUJ8utrZE0nZ6SjCe4QzZZMNtbSFwLr2UT4oNc4BYfWfaYAzsax4MAyTzMXJjLXvk7MJDGWDrxjGS/JmVYDdNi/ZSIzfnwDJFQ0r6y50tEO/IGEsJNGajxaMRpKzejrhRauBvzqEtWJ9eINf9Ox7Ugc5lL1nyRaEE0sdPSs8ALb1ythBtp6PVkfhvoktfVGAA/2jN3dhKMer4Rqun21WAqn1CayFW5DUnlPjq7K3xukymjKmPI+v6LKv1U3GHbpr9T/8tEtXQ+aFmTTIn0hs+cZOalWXNLUlaTUJ64THLKLnVtRG1VurPqVlEN6zaAAV1xbCq6tPQ2E68VFHVcweAIxBuD+pVgeR2Ymrn5/bTzzQMS9hyAp2uG1NFLLLnG/B4IUuMHH59SZZjUW1t0vOq3HMUuVluL7w0LgMhDdiX7dQRf0bXZzrQ9OFZtwIbKQk7xDtMy1/Hr1Jk57ZAGr5irP+wHAQmWWn2kltgj18UFbkfnc= falko@falko-laptop
+repo_update: true
+repo_upgrade: all
+package_update: true
+package_upgrade: true
+packages:
+- vim
+- git
+- tmux
+write_files:
+- content: |
+    # /bin/bash
+    #IP=$( dig +short myip.opendns.com @resolver1.opendns.com )
+    #IP=$(https://api.ipify.org/?format=text)
+    IP=$( curl https://ip4.seeip.org )
+    echo $IP
+    curl -v -u ${dyndnsuser}:${dyndnspass} "${dyndnsurl}?subdomain=${hostname}&domain=${domain}&address=$IP"
+    exit 0
+  path: /root/updatedns.sh
+  permissions: "0755"
+runcmd:
+- dnf update -y
+# twice, sometimes it doesn't work
+- sleep 5
+- dnf install -y aria2 bind-utils git jq nmap python3-pip unzip wget whois
+- git clone https://github.com/lanmaster53/recon-ng.git /opt/recon-ng
+- cd /opt/recon-ng ; pip install -r REQUIREMENTS ; cd
+# modules import/nmap
+- git clone https://github.com/darkoperator/dnsrecon.git /opt/dns-recon
+- cd /opt/dns-recon ; pip install -r requirements.txt ; cd
+- aria2c https://github.com/VirusTotal/vt-cli/releases/download/0.10.4/Linux64.zip
+- unzip Linux64.zip -d /usr/local/bin/
+- echo "export VTCLI_APIKEY=${APIKEY_VIRUSTOTAL}" >> /root/.bashrc
+- echo "export VIEWDNS_APIKEY=${APIKEY_VIEWDNS}" >> /root/.bashrc
+- echo "export ALIENVAULT_APIKEY=${APIKEY_ALIENVAULT}" >> /root/.bashrc
+- /root/updatedns.sh
+- touch /root/READY
+# alienvault, viewdns.info, binaryedge.io, builtwith.com, threatcrowd.org threatminer.org

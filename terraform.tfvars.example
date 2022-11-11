@@ -1,0 +1,18 @@
+hcloud_token = "INSERTHERETHESECRETTOKENFROMTHEHETZNERCLOUDANDKEEPITVERYSECRET"
+server_type = "cx11"
+image = "debian-11"
+instances = 1
+ssh_key_fingerprint = ""
+
+hostname = "myname"
+domain = "mydomain"
+
+# dyndns
+dyndnsuser = "dyndnsuser"
+dyndnspass = "dyndnspass"
+dyndnsurl = "https://dyndnsurl/foo/bar"
+
+# ApiKeys
+APIKEY_VIRUSTOTAL = "secretvirustotal_apikey"
+APIKEY_VIEWDNS = "secretviewdns_apikey"
+APIKEY_ALIENVAULT = "secretalienvault_apikey"
