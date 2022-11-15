@@ -33,6 +33,7 @@ terraform apply
 
 ## investigate
 We start a quick investigation for a first overview:
+* check for redirects, shorteners and such foo. If there are creepy chars in url, use an [urlencoder](https://www.urlencoder.org/)
 * whois <DOMAIN>|<IP>
 * dig a <DOMAIN> +short
 * dig -x <IP> +short
@@ -40,7 +41,11 @@ We start a quick investigation for a first overview:
 * ask viewdns API
 * ask alienvault API
 
+
 ```
+# check for redirects, shorteners, ...
+curl -LI <DOMAIN>
+
 # set vars for IP and DOMAIN if already known
 export IP=<IP>
 export DOM=<DOMAIN>
