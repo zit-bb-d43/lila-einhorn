@@ -26,7 +26,8 @@ terraform init
 terraform plan
 terraform apply
 
-# login, do your foo and investigate
+# login as user »pferd«, do your foo and investigate
+ssh pferd@[IP|HOSTNAME]
 # ...
 # ...
 ```
@@ -45,6 +46,8 @@ We start a quick investigation for a first overview:
 ```
 # check for redirects, shorteners, ...
 curl -LI <DOMAIN>
+# curl it. remember that sometimes a real browser is neccessary
+curl <DOMAIN>
 
 # set vars for IP and DOMAIN if already known
 export IP=<IP>
