@@ -14,7 +14,7 @@ data "hcloud_ssh_key" "ssh_key" {
 resource "hcloud_server" "lilaeinhorn" {
   # count = var.instances
   name = "${var.hostname}" # -${count.index}"
-  image = var.image
+  image = var.image 
   server_type = var.server_type
   location = var.location
   ssh_keys = [data.hcloud_ssh_key.ssh_key.id]

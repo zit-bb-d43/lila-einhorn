@@ -8,7 +8,7 @@ variable "server_type" {
   default = "cx11"
 }
 variable "image" {
-  default = "fedora-36"
+  default = "fedora-39"
 }
 variable "ssh_key_fingerprint" {
   default = ""
