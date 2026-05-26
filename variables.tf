@@ -5,10 +5,10 @@ variable "instances" {
   default = "1"
 }
 variable "server_type" {
-  default = "cx11"
+  default = "cx23"
 }
 variable "image" {
-  default = "fedora-39"
+  default = "fedora-44"
 }
 variable "ssh_key_fingerprint" {
   default = ""
